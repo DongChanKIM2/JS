@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO</title>
+</head>
+<body>
+  <h1 class="my-colorful">My JS Todo APP </h1>
+  <form action="/todos/" method="POST">
+    <input id="todoInput" type="text">
+    <button id="addTodoButton">ADD Todo</button>
+  </form>
+  <ul id="todoList">
+    <li>밥먹기</li>
+    <li>복습하기</li>
+  </ul>
+
+  <script>
+    /*파이썬
+      def func_name(arg):
+        logic
+        return value
+
+      func_name = lambda arg: value
+      
+
+      js
+      function funcName(arg) {
+        logic
+        return value
+      }
+      
+      const funcName = function(arg) {
+        return value
+      }
+
+    */
+
+
+     // event는 무조건 주어지지만 그 외의 인자값은 조심히 쓰자!
+     function addTodo(event) {
+      console.log(event)
+      // 0. form tag의 button은 새로 페이지가 뜨므로 preventDefault를 하면 데이터전달이 되고 리셋이 됨
+      event.preventDefault()
+      // 1. input 태그 선택
+      const inputTag = document.querySelector('#todoInput')
+      // 2. 선택한 input의 value 값을 잡는다.
+      const inputData = inputTag.value
+      // 3. 새로운 li 태그 생성
+      const liTag = document.createElement('li')
+      // 4. 3에서 만든 태그의 innerText를 2번 value로 설정
+      liTag.innerText = inputData
+      // 5. 기존 ul 태그 선택
+      const ulTag = document.querySelector('#todoList')
+      // 6. 3에서 만든 li 태그를 5에서 만든 ul태그의 자식으로 추가
+      ulTag.appendChild(liTag)
+      // 7. input 태그 내용을 지운다.
+      inputTag.value = ""
+    }
+    
+    // #addTodoBtn 을 선택한다.
+    const addTodoBtn = document.querySelector('#addTodoBtn')
+    // addTodoBtn 을 'click' 하면, addTodo 함수를 실행하도록 설정한다.
+    addTodoBtn.addEventListener('click', addTodo)
+  </script>
+
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <!-- 1. onclick -->
+  <button onclick="alertMessage()">나를 눌러봐!</button>
+
+  <!-- 2. addEventListener -->
+  <button id="my-button">나를 눌러봐!!</button>
+  <hr>
+
+	<!-- 3. addEventListener2 -->
+  <p id="my-paragraph"></p>
+
+  <form action="#">
+    <label for="my-text-input">내용을 입력하세요.</label>
+    <input id="my-text-input" type="text">
+  </form>
+  <hr>
+
+  <!-- 4. addEventListener3 -->
+  <h2>Change My Color</h2>
+    <label for="change-color-input">원하는 색상을 영어로 입력하세요.</label>
+    <input id="change-color-input"></input>
+  <hr>
+
+  <script>
+    // 속성으로 alert 사용하는 법 1
+    const alertMessage = function () {
+      alert('메렁!!!')
+    }
+
+    // event listener 로 사용하는 법 2
+    const myButton = document.querySelector('#my-button')
+    myButton.addEventListener('click', alertMessage)
+    
+    // 추가할 때 3
+    const myTextInput = document.querySelector('#my-text-input')
+    // p tag 에 입력값 출력해주기
+    myTextInput.addEventListener('input', function (event) {
+      const myPtag = document.querySelector('#my-paragraph')
+      myPtag.innerText = event.target.value
+
+    })
+
+    // 4 색상입력시 색상변경(함수화 해놓으면 편리함!)
+    // input 선택
+    const colorInput = document.querySelector('#change-color-input')
+
+    const chageColor = function (event) {
+      const h2Tag = document.querySelector('h2')
+      h2Tag.style.color = event.target.value
+    }
+
+    colorInput.addEventListener('input', chageColor)
+
+
+
+  </script>
+</body>
+</html>
