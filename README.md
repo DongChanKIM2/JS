@@ -108,10 +108,22 @@ Node.js가 나오며 단순히 프론트적인 부분외에 백엔드적인 서�
 |재선언여부|X|X|O|
 |스코프|블록|블록|함수|
 
+## 잡담
 
+JS와 Python은 모두 객체 지향 프로그래밍
+
+객체 지향프로그래밍이란? 객체를 메세지로 대화하는 언어(알면 알수록 어렵다)
+
+JS의 함수는 Python의 class이고 JS의 생성자는 Python의 인스턴스
+
+labmda와 같은 임시 함수는 용량을 안 잡아먹으니까 용이함
+
+reduce: 파이선과 js 에서 사실상 동일한 역할
 
 
 
 ## 참조 page
 
-https://htmldom.dev/
+120개 기능: https://htmldom.dev/
+
+reduce: https://www.youtube.com/watch?v=RW25tEAMC9w
