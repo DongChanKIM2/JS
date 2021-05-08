@@ -1,0 +1,72 @@
+{% comment %} 
+  html -> axios(json) 을 통해
+ {% endcomment %}
+
+<div class="jumbotron text-center text-white bg-dark">
+  <p class="lead mb-1">작성자 정보</p>
+  <h1 class="display-4">{{ person.username }}</h1>
+  <hr>
+  {% with followings=person.followings.all followers=person.followers.all %}
+    <p class="lead">
+      팔로잉 : <span id="followingNum">{{ followings|length }}</span>
+      / 팔로워 : <span id="followedNum">{{ followers|length }}</span>
+    </p>
+    <!-- 팔로우 버튼 -->
+    {% csrf_token %}
+    
+    {% if request.user != person %}
+    
+      <form id="followForm" data-person-pk="{{ person.pk }}">
+    
+        {% if request.user in followers %}
+          <button class="btn-secondary btn-lg" id="followBtn" role="button">Unfollow</button>
+        {% else %}
+          <button class="btn-primary btn-lg" id="followBtn" role="button">Follow</button>
+        {% endif %}
+      </form>
+    {% endif %}
+  {% endwith %}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    // 폼, 버튼, CSRF_token 받아주기
+    const followForm = document.querySelector('#followForm')
+    const followBtn = document.querySelector('#followBtn')
+    const followingNum = document.querySelector('#followingNum')
+    const followedNum = document.querySelector('#followedNum')
+
+
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+
+
+
+    // 클릭하면 일어나는 함수!
+    followForm.addEventListener('submit', function(event) {
+      event.preventDefault()
+      // user pk(보고 있는 사람의 pk를 알아야 함)
+      const personPk = event.target.dataset.personPk
+      // axios화해서 데이터 보내주기
+      axios({
+        method: 'post',
+        url: `http://127.0.0.1:8000/accounts/follow/${personPk}/`,
+        headers: { 'X-CSRFToken': csrftoken }
+      })
+        .then(function (res) {
+          console.log(res.data)
+          followBtn.innerText = res.data.follow ? '언팔로우' : '팔로우'
+          followingNum.innerText = res.data.follower_cnt
+          followedNum.innerText = res.data.followed_cnt
+          followBtn.classList.toggle('btn-primary')
+          followBtn.classList.toggle('btn-secondary')          
+        })
+    })
+
+    
+
+    // axios({
+
+    //   headers: { 'X-CSRFToken': csrftoken }
+    // })
+
+</script>

@@ -1,0 +1,37 @@
+<!-- result.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>result</title>
+</head>
+<body>
+  <h1>DOG IMAGE</h1>
+  <div>
+    <button id="getDogBtn">GET DOG IMAGE</button>
+  </div>
+  <hr>
+  <div>
+    <img id="dogImage" style="display: none;" alt="random-dog-image">
+  </div>
+  
+  <!-- script -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const dogImage = document.querySelector('#dogImage')
+    const getDogBtn = document.querySelector('#getDogBtn')
+
+    getDogBtn.addEventListener('click', function (event) {
+      axios.get('https://dog.ceo/api/breeds/image/random', )   // axios.get() 리턴값은 promise
+      .then(function (res) {
+        const dogUrl = res.data.message  // axios 사용시, res.data 까지는 고정
+        dogImage.src = dogUrl
+        dogImage.style.display = null
+      })
+      .catch(function (err) {
+        console.error(err)
+      })
+    })
+  </script>
+</body>
+</html>
