@@ -52,7 +52,8 @@
       event.preventDefault()
     })
 
-    // 4
+    // 4. scroll은 preventDefault로 막을 수 없음
+    // cancelable로 막을 수 있는지 없는지 확인 가능
     document.addEventListener('scroll', function (event) {
       // console.log(event)
       console.log(event.cancelable)
